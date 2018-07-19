@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  initializers:
+    pending: []
+  labels:
+    app: project-initializer
+  name: project-initializer
+  namespace: kube-system
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: project-initializer
+      name: project-initializer
+    spec:
+      serviceAccountName: project-initializer
+      containers:
+        - name: project-initializer
+          image: docker.k8s.harbur.io/project-initializer:0.0.1
+          imagePullPolicy: Always
