@@ -18,5 +18,5 @@ spec:
       serviceAccountName: project-initializer
       containers:
         - name: project-initializer
-          image: docker.k8s.harbur.io/project-initializer:0.0.1
+          image: spiddy/project-initializer:0.0.1
           imagePullPolicy: Always

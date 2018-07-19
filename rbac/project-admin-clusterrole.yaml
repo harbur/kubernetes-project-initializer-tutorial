@@ -1,9 +1,11 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: users:namespace-rw
+  name: project-admin
 aggregationRule:
   clusterRoleSelectors:
   - matchLabels:
+      rbac.authorization.k8s.io/aggregate-to-project-admin: "true"
+  - matchLabels:
       rbac.authorization.k8s.io/aggregate-to-edit: "true"
-rules: []
+rules: [] # Rules are automatically filled in by the controller manager.

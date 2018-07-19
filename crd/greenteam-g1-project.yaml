@@ -1,7 +1,7 @@
 apiVersion: "tutorial.harbur.io/v1alpha1"
 kind: "Project"
 metadata:
-  name: "aaaaaa-project"
-  namespace: blueteam
+  name: "g1"
+  namespace: greenteam
 spec:
-  owner: blueteam
+  owner: greenteam

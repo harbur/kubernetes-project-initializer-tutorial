@@ -23,16 +23,11 @@ import (
 const (
 	defaultAnnotation      = "initializer.kubernetes.io/projects"
 	defaultInitializerName = "project.initializer.kubernetes.io"
-	defaultConfigmap       = "envoy-initializer"
-	defaultNamespace       = "default"
 )
 
 var (
-	annotation        string
-	configmap         string
-	initializerName   string
-	namespace         string
-	requireAnnotation bool
+	annotation      string
+	initializerName string
 )
 
 type config struct {
@@ -75,10 +70,7 @@ func main() {
 	/////////////////
 
 	flag.StringVar(&annotation, "annotation", defaultAnnotation, "The annotation to trigger initialization")
-	flag.StringVar(&configmap, "configmap", defaultConfigmap, "The envoy initializer configuration configmap")
 	flag.StringVar(&initializerName, "initializer-name", defaultInitializerName, "The initializer name")
-	flag.StringVar(&namespace, "namespace", "default", "The configuration namespace")
-	flag.BoolVar(&requireAnnotation, "require-annotation", false, "Require annotation for initialization")
 	flag.Parse()
 
 	log.Println("Starting the Kubernetes project initializer...")
@@ -167,11 +159,11 @@ func initializeProject(project *v1alpha1.Project, clientset *kubernetes.Clientse
 
 func createRoleBinding(project *v1alpha1.Project, namespace string, clientset *kubernetes.Clientset) error {
 	// Create RoleBinding
-	roleName := project.Spec.Owner + "-cluster-admin"
+	roleName := project.Spec.Owner + "-admin"
 	roleSpec := &rbacv1.RoleBinding{ObjectMeta: metav1.ObjectMeta{Name: roleName}}
 	roleSpec.RoleRef.APIGroup = "rbac.authorization.k8s.io"
 	roleSpec.RoleRef.Kind = "ClusterRole"
-	roleSpec.RoleRef.Name = "users:cluster-admin"
+	roleSpec.RoleRef.Name = "admin"
 	roleSpec.Subjects = make([]rbacv1.Subject, 1)
 	roleSpec.Subjects[0].APIGroup = "rbac.authorization.k8s.io"
 	roleSpec.Subjects[0].Kind = "User"
@@ -188,7 +180,7 @@ func createRoleBinding(project *v1alpha1.Project, namespace string, clientset *k
 }
 
 func createNamespace(project *v1alpha1.Project, namespaceSuffix string, clientset *kubernetes.Clientset) error {
-	namespace = project.Namespace + "-" + project.Name + "-" + namespaceSuffix
+	namespace := project.Namespace + "-" + project.Name + "-" + namespaceSuffix
 	nsSpec := &corev1.Namespace{ObjectMeta: metav1.ObjectMeta{Name: namespace}}
 	result, err := clientset.Core().Namespaces().Create(nsSpec)
 	if err != nil {

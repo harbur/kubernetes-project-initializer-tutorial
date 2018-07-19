@@ -4,6 +4,14 @@ This tutorial walks you through building and deploying a [Kubernetes Initializer
 
 > Initializers are an alpha feature and subject to change. Please report any Initializer specific issues on the [Kubernetes issue tracker](https://github.com/kubernetes/kubernetes/issues).
 
+## How it Works
+
+A Custom Resource Definiiton `Project` is created and is using initializers to trigger creation of sub-namespaces and grant of user access with rolebindings.
+
+An RBAC role `project-admin` is granted privileges to manage projects.
+
+Project admins on separate namespaces and manage their own projects isolated from each other.
+
 ## Prerequisites
 
 Kubernetes 1.7.0+ is required with [support for Initializers enabled](https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature). If you're using Google Container Engine create an alpha cluster:
@@ -23,10 +31,7 @@ minikube start --extra-config=apiserver.runtime-config=admissionregistration.k8s
 Download the tutorial by cloning this repository:
 
 ```shell
-git clone TBD
-```
-
-```shell
+git clone https://github.com/harbur/kubernetes-project-initializer-tutorial.git
 cd kubernetes-projects-initializer-tutorial
 ```
 
@@ -35,5 +40,6 @@ cd kubernetes-projects-initializer-tutorial
 - [Configure RBAC](docs/01.configure-rbac.md)
 - [Create Projects Custom Resource](docs/02.create-projects-custom-resource.md)
 - [Deploy The Project Initializer](docs/03.deploy-project-initializer.md)
-- [Initializing Deployments](docs/04.initializing-deployments.md)
-- [Cleaning Up](docs/05.cleanup.md)
+- [Initializing Projects](docs/04.initializing-projects.md)
+- [Demo](docs/05.demo.md)
+- [Cleaning Up](docs/06.cleanup.md)

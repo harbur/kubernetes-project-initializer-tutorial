@@ -8,8 +8,7 @@ func (in *Project) DeepCopyInto(out *Project) {
 	out.TypeMeta = in.TypeMeta
 	out.ObjectMeta = in.ObjectMeta
 	out.Spec = ProjectSpec{
-		Replicas: in.Spec.Replicas,
-		Owner:    in.Spec.Owner,
+		Owner: in.Spec.Owner,
 	}
 }
 

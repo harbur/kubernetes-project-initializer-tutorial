@@ -3,8 +3,7 @@ package v1alpha1
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 type ProjectSpec struct {
-	Replicas int    `json:"replicas"`
-	Owner    string `json:"owner"`
+	Owner string `json:"owner"`
 }
 
 type Project struct {
