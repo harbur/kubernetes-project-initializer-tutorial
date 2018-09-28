@@ -1,4 +1,4 @@
-package: github.com/martin-helmich/kubernetes-crd-example
+package: github.com/harbur/project-initializer
 import:
 - package: k8s.io/apimachinery
   subpackages:

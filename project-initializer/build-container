@@ -1,6 +1,8 @@
 #!/bin/bash
-./build
-docker build -t spiddy/project-initializer:0.0.1 .
-docker push spiddy/project-initializer:0.0.1
-rm project-initializer
 
+# Returns the current directory as absolute path, independently from where it was called from
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+# Build & Push Docker Image
+docker build -t spiddy/project-initializer:0.0.1 ${DIR}
+docker push spiddy/project-initializer:0.0.1
