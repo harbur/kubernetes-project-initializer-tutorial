@@ -4,6 +4,7 @@ metadata:
   name: aggregate:projects
   labels:
     rbac.authorization.k8s.io/aggregate-to-project-admin: "true"
+    app: project-initializer
 # These rules will be added to the "project-admin" role.
 rules:
 - apiGroups: ["tutorial.harbur.io"]
