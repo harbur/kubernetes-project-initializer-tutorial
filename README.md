@@ -32,7 +32,7 @@ Download the tutorial by cloning this repository:
 
 ```shell
 git clone https://github.com/harbur/kubernetes-project-initializer-tutorial.git
-cd kubernetes-projects-initializer-tutorial
+cd kubernetes-project-initializer-tutorial
 ```
 
 ## Tutorial
